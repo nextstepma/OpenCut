@@ -5,7 +5,7 @@
 			"outputs": ["rust/wasm/pkg/**"]
 		},
 		"build": {
-			"dependsOn": ["//#build:wasm", "^build"],
+			"dependsOn": ["^build"],
 			"outputs": [".next/**", "!.next/cache/**"],
 			"env": [
 				"NODE_ENV",
