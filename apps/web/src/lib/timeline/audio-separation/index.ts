@@ -43,16 +43,13 @@ export function canRecoverSourceAudio(params: {
 	return params.element.type === "video" && isSourceAudioSeparated({ element: params.element });
 }
 
-export function canToggleSourceAudio({
-	element,
-	mediaAsset,
-}: {
+export function canToggleSourceAudio(params: {
 	element: TimelineElement;
 	mediaAsset: MediaAsset | null | undefined;
-}): element is VideoElement {
+}): params is { element: VideoElement; mediaAsset: MediaAsset | null | undefined } {
 	return (
-		canRecoverSourceAudio({ element }) ||
-		canExtractSourceAudio({ element, mediaAsset })
+		canRecoverSourceAudio({ element: params.element }) ||
+		canExtractSourceAudio({ element: params.element, mediaAsset: params.mediaAsset })
 	);
 }
 
