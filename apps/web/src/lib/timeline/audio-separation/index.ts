@@ -25,27 +25,22 @@ export function isSourceAudioSeparated({
 	return !isSourceAudioEnabled({ element });
 }
 
-export function canExtractSourceAudio({
-	element,
-	mediaAsset,
-}: {
+export function canExtractSourceAudio(params: {
 	element: TimelineElement;
 	mediaAsset: MediaAsset | null | undefined;
-}): element is VideoElement {
+}): params is { element: VideoElement; mediaAsset: MediaAsset } {
 	return (
-		element.type === "video" &&
-		isSourceAudioEnabled({ element }) &&
-		!!mediaAsset &&
-		mediaAsset.hasAudio !== false
+		params.element.type === "video" &&
+		isSourceAudioEnabled({ element: params.element }) &&
+		!!params.mediaAsset &&
+		params.mediaAsset.hasAudio !== false
 	);
 }
 
-export function canRecoverSourceAudio({
-	element,
-}: {
+export function canRecoverSourceAudio(params: {
 	element: TimelineElement;
-}): element is VideoElement {
-	return element.type === "video" && isSourceAudioSeparated({ element });
+}): params is { element: VideoElement } {
+	return params.element.type === "video" && isSourceAudioSeparated({ element: params.element });
 }
 
 export function canToggleSourceAudio({
